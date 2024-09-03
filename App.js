@@ -6,7 +6,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const Stack = createNativeStackNavigator();
 
-const HomeComponent = () => {
+const HomeComponent = (props) => {
     const navigation = useNavigation();
     const onButtonClick = () => {
         navigation.navigate('Product');
@@ -18,7 +18,7 @@ const HomeComponent = () => {
         </View>
     )
 }
-const ProductComponent = () => {
+const ProductComponent = (props) => {
     const navigation = useNavigation();
     const onButtonClick = () => {
         navigation.navigate('Profile');
@@ -27,10 +27,11 @@ const ProductComponent = () => {
         <View style={styles.container}>
             <Text>Product</Text>
             <Button onPress={onButtonClick} title="Go to Profile" />
+            <Button onPress={() => navigation.setOptions({ title: 'Product List' })} title="Change the Title" />
         </View>
     )
 }
-const ProfileComponent = () => {
+const ProfileComponent = (props) => {
     const navigation = useNavigation();
     const onButtonClick = () => {
         navigation.navigate('Home');
@@ -49,7 +50,7 @@ export default function App() {
             <NavigationContainer>
                 <Stack.Navigator screenOptions={{ }} initialRouteName="Home">
                     <Stack.Screen name="Home" component={HomeComponent} />
-                    <Stack.Screen options={{ headerShown: false }} name="Product" component={ProductComponent} />
+                    <Stack.Screen options={{ headerShown: true }} name="Product" component={ProductComponent} />
                     <Stack.Screen name="Profile" component={ProfileComponent} />
                 </Stack.Navigator>
             </NavigationContainer>
@@ -63,5 +64,5 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-    },
+    }
 });
