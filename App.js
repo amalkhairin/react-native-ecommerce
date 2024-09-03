@@ -21,16 +21,30 @@ const HomeComponent = () => {
     )
 }
 const ProductComponent = () => {
+    const navigation = useNavigation();
+    const onButtonClick = () => {
+        navigation.navigate('Profile');
+    }
     return (
         <View style={styles.container}>
             <Text>Product</Text>
+            <Pressable onPress={onButtonClick}>
+                <Text>Go to Profile</Text>
+            </Pressable>
         </View>
     )
 }
 const ProfileComponent = () => {
+    const navigation = useNavigation();
+    const onButtonClick = () => {
+        navigation.navigate('Home');
+    }
     return (
         <View style={styles.container}>
             <Text>Profile</Text>
+            <Pressable onPress={onButtonClick}>
+                <Text>Go to Home</Text>
+            </Pressable>
         </View>
     )
 }
