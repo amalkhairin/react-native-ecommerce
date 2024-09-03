@@ -100,6 +100,11 @@ export default function App() {
                             headerTitleStyle: {
                                 fontWeight: 'bold'
                             },
+                            headerLeft: () => {
+                              return <Pressable onPress={() => alert('back pressed')}>
+                                  <Text style={{ marginRight: 10 }}>Back</Text>
+                              </Pressable>  
+                            },
                             headerRight: () => {
                                 return <Pressable onPress={() => alert('hamberger pressed')}>
                                     <Text>Hamberger</Text>
