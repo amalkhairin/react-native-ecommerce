@@ -1,8 +1,10 @@
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import axios from 'axios';
 import { StatusBar } from 'expo-status-bar';
-import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Button, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useEffect, useState } from 'react';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,15 +21,45 @@ const HomeComponent = (props) => {
     )
 }
 const ProductComponent = (props) => {
+
+    const [todoList, setTodoList] = useState([]);
+
     const navigation = useNavigation();
     const onButtonClick = () => {
         navigation.navigate('Profile');
     }
+
+    const getInitialTodoList = async () => {
+        const todoListResponse = await axios.get('https://jsonplaceholder.typicode.com/todos')
+        setTodoList(todoListResponse.data);
+    }
+
+    useEffect(() => {
+        getInitialTodoList();
+    }, [])
+
+
     return (
         <View style={styles.container}>
-            <Text>Product</Text>
-            <Button onPress={onButtonClick} title="Go to Profile" />
-            <Button onPress={() => navigation.setOptions({ title: 'Product List' })} title="Change the Title" />
+            {props.route.params?.productId ? <Text>Product Detail ID: {props.route.params?.productId}</Text>
+
+                :
+                <>
+                    <Text>Product Detail ID: {props.route.params?.productId}</Text>
+                    <Text>Product</Text>
+                    <Button onPress={onButtonClick} title="Go to Profile" />
+                    <Button onPress={() => navigation.setOptions({ title: 'Product List' })} title="Change the Title" />
+                    <ScrollView>
+                        {todoList.map((todo) => (
+                            <Pressable onPress={() => navigation.navigate('Product', { productId: todo.id })} key={todo.id}>
+                                <Text style={{ fontWeight: 'bold' }}>ID: {todo.id}</Text>
+                                <Text style={{ fontWeight: 'bold' }}>{todo.title}</Text>
+                                <Text>status: {todo.completed ? 'completed' : 'not completed'}</Text>
+                            </Pressable>
+                        ))}
+                    </ScrollView>
+                </>
+            }
         </View>
     )
 }
@@ -48,7 +80,7 @@ export default function App() {
     return (
         <SafeAreaProvider>
             <NavigationContainer>
-                <Stack.Navigator screenOptions={{ }} initialRouteName="Home">
+                <Stack.Navigator screenOptions={{}} initialRouteName="Home">
                     <Stack.Screen name="Home" component={HomeComponent} />
                     <Stack.Screen options={{ headerShown: true }} name="Product" component={ProductComponent} />
                     <Stack.Screen name="Profile" component={ProfileComponent} />
