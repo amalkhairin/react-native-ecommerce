@@ -7,10 +7,25 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 const Stack = createNativeStackNavigator();
 
 const HomeComponent = () => {
-    return <View style={styles.container}>
-        <Text>Hello world</Text>
-        <StatusBar style="auto" />
-    </View>
+    return (
+        <View style={styles.container}>
+            <Text>Home</Text>
+        </View>
+    )
+}
+const ProductComponent = () => {
+    return (
+        <View style={styles.container}>
+            <Text>Product</Text>
+        </View>
+    )
+}
+const ProfileComponent = () => {
+    return (
+        <View style={styles.container}>
+            <Text>Profile</Text>
+        </View>
+    )
 }
 
 export default function App() {
@@ -19,6 +34,8 @@ export default function App() {
             <NavigationContainer>
                 <Stack.Navigator>
                     <Stack.Screen name="Home" component={HomeComponent} />
+                    <Stack.Screen name="Product" component={ProductComponent} />
+                    <Stack.Screen name="Profile" component={ProfileComponent} />
                 </Stack.Navigator>
             </NavigationContainer>
         </SafeAreaProvider>
