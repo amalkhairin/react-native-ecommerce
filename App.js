@@ -32,7 +32,7 @@ export default function App() {
     return (
         <SafeAreaProvider>
             <NavigationContainer>
-                <Stack.Navigator>
+                <Stack.Navigator initialRouteName="Product">
                     <Stack.Screen name="Home" component={HomeComponent} />
                     <Stack.Screen name="Product" component={ProductComponent} />
                     <Stack.Screen name="Profile" component={ProfileComponent} />
