@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 
 const Stack = createNativeStackNavigator();
 
+
 const HomeComponent = (props) => {
     const navigation = useNavigation();
     const onButtonClick = () => {
