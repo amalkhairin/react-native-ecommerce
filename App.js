@@ -1,15 +1,22 @@
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const Stack = createNativeStackNavigator();
 
 const HomeComponent = () => {
+    const navigation = useNavigation();
+    const onButtonClick = () => {
+        navigation.navigate('Product');
+    }
     return (
         <View style={styles.container}>
             <Text>Home</Text>
+            <Pressable onPress={onButtonClick}>
+                <Text>Go to Product</Text>
+            </Pressable>
         </View>
     )
 }
@@ -32,7 +39,7 @@ export default function App() {
     return (
         <SafeAreaProvider>
             <NavigationContainer>
-                <Stack.Navigator initialRouteName="Product">
+                <Stack.Navigator initialRouteName="Home">
                     <Stack.Screen name="Home" component={HomeComponent} />
                     <Stack.Screen name="Product" component={ProductComponent} />
                     <Stack.Screen name="Profile" component={ProfileComponent} />
