@@ -81,10 +81,33 @@ export default function App() {
     return (
         <SafeAreaProvider>
             <NavigationContainer>
-                <Stack.Navigator screenOptions={{}} initialRouteName="Home">
-                    <Stack.Screen name="Home" component={HomeComponent} />
-                    <Stack.Screen options={{ headerShown: true }} name="Product" component={ProductComponent} />
-                    <Stack.Screen name="Profile" component={ProfileComponent} />
+                <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Profile">
+                    <Stack.Screen
+                        name="Home"
+                        component={HomeComponent} />
+                    <Stack.Screen 
+                        options={{ headerShown: true }}
+                        name="Product" 
+                        component={ProductComponent} />
+                    <Stack.Screen
+                        options={{ 
+                            title: 'Profile and Settings',
+                            headerShown: true,
+                            headerStyle: {
+                                backgroundColor: 'aqua'
+                            },
+                            headerTintColor: 'red',
+                            headerTitleStyle: {
+                                fontWeight: 'bold'
+                            },
+                            headerRight: () => {
+                                return <Pressable onPress={() => alert('hamberger pressed')}>
+                                    <Text>Hamberger</Text>
+                                </Pressable>
+                            }
+                        }}
+                        name="Profile"
+                        component={ProfileComponent} />
                 </Stack.Navigator>
             </NavigationContainer>
         </SafeAreaProvider>
