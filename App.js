@@ -32,6 +32,7 @@ const ProductComponent = (props) => {
 
     const getInitialTodoList = async () => {
         const todoListResponse = await axios.get('https://jsonplaceholder.typicode.com/todos')
+        // const todoListResponse = await axios.get('http:localhost:3000/api/v1/products')
         setTodoList(todoListResponse.data);
     }
 
