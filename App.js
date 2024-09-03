@@ -1,7 +1,7 @@
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const Stack = createNativeStackNavigator();
@@ -14,9 +14,7 @@ const HomeComponent = () => {
     return (
         <View style={styles.container}>
             <Text>Home</Text>
-            <Pressable onPress={onButtonClick}>
-                <Text>Go to Product</Text>
-            </Pressable>
+            <Button onPress={onButtonClick} title="Go to Product" />
         </View>
     )
 }
@@ -28,9 +26,7 @@ const ProductComponent = () => {
     return (
         <View style={styles.container}>
             <Text>Product</Text>
-            <Pressable onPress={onButtonClick}>
-                <Text>Go to Profile</Text>
-            </Pressable>
+            <Button onPress={onButtonClick} title="Go to Profile" />
         </View>
     )
 }
@@ -42,9 +38,7 @@ const ProfileComponent = () => {
     return (
         <View style={styles.container}>
             <Text>Profile</Text>
-            <Pressable onPress={onButtonClick}>
-                <Text>Go to Home</Text>
-            </Pressable>
+            <Button onPress={onButtonClick} title="Go to Home" />
         </View>
     )
 }
