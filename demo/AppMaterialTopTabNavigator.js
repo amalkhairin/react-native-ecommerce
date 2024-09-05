@@ -1,5 +1,5 @@
 if (__DEV__) {
-    require("./ReactotronConfig");
+    require("../ReactotronConfig");
 }
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Ionicons from '@expo/vector-icons/Ionicons';

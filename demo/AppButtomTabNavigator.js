@@ -1,5 +1,5 @@
 if (__DEV__) {
-    require("./ReactotronConfig");
+    require("../ReactotronConfig");
 }
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
