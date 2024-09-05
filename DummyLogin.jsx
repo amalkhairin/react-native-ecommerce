@@ -16,6 +16,11 @@ const DummyLogin = () => {
         password: '',
     });
 
+    const handleLogin = async () => {
+        await login(loginForm.username, loginForm.password);
+    }
+    
+
     const [isShowPassword, setIsShowPassword] = useState(false);
 
     const onChangeTextHandler = (fieldName) => (value) => {
@@ -42,7 +47,7 @@ const DummyLogin = () => {
                         />
                     }
                 />
-                <Button mode="contained" onPress={login}>
+                <Button mode="contained" onPress={handleLogin}>
                     Login
                 </Button>
             </View>

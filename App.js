@@ -76,7 +76,7 @@ const ProtectedNavigator = () => {
     )
 }
 
-const NavigationContainerWithAut = () => {
+const NavigationContainerWithAuth = () => {
     const { isAuthenticated } = useAuth()
     return (
         <NavigationContainer>
@@ -93,7 +93,7 @@ export default function App() {
         <SafeAreaProvider>
             <SafeAreaView style={{ flex: 1 }}>
                 <AuthProvider>
-                    <NavigationContainerWithAut />
+                    <NavigationContainerWithAuth />
                 </AuthProvider>
             </SafeAreaView>
         </SafeAreaProvider>
