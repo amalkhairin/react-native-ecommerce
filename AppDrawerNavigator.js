@@ -6,18 +6,16 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import axios from 'axios';
 import { StatusBar } from 'expo-status-bar';
 import { Button, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useEffect, useState } from 'react';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import 'react-native-gesture-handler';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 const Stack = createNativeStackNavigator();
-// const Tab = createBottomTabNavigator();
-const Tab = createMaterialTopTabNavigator();
+const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
 
@@ -99,62 +97,60 @@ const routeIconMapping = {
 export default function App() {
     return (
         <SafeAreaProvider>
-            <SafeAreaView style={{ flex: 1 }}>
-                <NavigationContainer>
-                    <Tab.Navigator screenOptions={({ route }) => ({
-                        // headerShown: false,
-                        headerStyle: {
-                            backgroundColor: 'peachpuff',
-                        },
-                        headerTintColor: 'dimgray',
-                        draawerPosition: 'left',
-                        drawerType: 'slide',
-                        tabBarIcon: ({ focused, color, size }) => {
-                            return <Ionicons name={routeIconMapping[route.name]} size={size} color={color} />
-                        },
-                        tabBarActiveTintColor: 'darkred',
-                        tabBarLabelStyle: {
-                            color: 'dimgray',
-                        },
-                        tabBarInactiveTintColor: 'dimgray',
-                        // tabBarBadge: route.name == 'Product' ? '99+' : null,
-
-                        // tabBarShowLabel: false
-                    })} initialRouteName="Profile">
-                        <Tab.Screen
-                            name="Home"
-                            component={HomeComponent} />
-                        <Tab.Screen
-                            options={{ headerShown: true, }}
-                            name="Product"
-                            component={ProductComponent} />
-                        <Tab.Screen
-                            options={{
-                                title: 'Profile and Settings',
-                                headerShown: true,
-                                headerStyle: {
-                                    backgroundColor: 'peachpuff',
-                                },
-                                headerTintColor: 'dimgray',
-                                headerTitleStyle: {
-                                    fontWeight: 'bold'
-                                },
-                                // headerLeft: () => {
-                                //     return <Pressable onPress={() => alert('back pressed')}>
-                                //         <Ionicons name="arrow-back" size={24} color="black" />
-                                //     </Pressable>
-                                // },
-                                headerRight: () => {
-                                    return <Pressable onPress={() => alert('hamberger pressed')}>
-                                        <FontAwesome6 name="burger" size={24} color="dimgray" />
-                                    </Pressable>
-                                }
-                            }}
-                            name="Profile"
-                            component={ProfileComponent} />
-                    </Tab.Navigator>
-                </NavigationContainer>
-            </SafeAreaView>
+            <NavigationContainer>
+                <Drawer.Navigator screenOptions={({ route }) => ({
+                    // headerShown: false,
+                    headerStyle: {
+                        backgroundColor: 'peachpuff',
+                    },
+                    headerTintColor: 'dimgray',
+                    draawerPosition: 'left',
+                    drawerType: 'slide',
+                    drawerIcon: ({ focused, color, size }) => {
+                        return <Ionicons name={routeIconMapping[route.name]} size={size} color={color} />
+                    },
+                    drawerActiveTintColor: 'darkred',
+                    drawerLabelStyle: {
+                        color: 'dimgray',
+                    },
+                    drawerInactiveTintColor: 'dimgray',
+                    drawerBadge: route.name == 'Product' ? '99+' : null,
+                    
+                    // tabBarShowLabel: false
+                })} initialRouteName="Profile">
+                    <Drawer.Screen
+                        name="Home"
+                        component={HomeComponent} />
+                    <Drawer.Screen
+                        options={{ headerShown: true, }}
+                        name="Product"
+                        component={ProductComponent} />
+                    <Drawer.Screen
+                        options={{
+                            title: 'Profile and Settings',
+                            headerShown: true,
+                            headerStyle: {
+                                backgroundColor: 'peachpuff',
+                            },
+                            headerTintColor: 'dimgray',
+                            headerTitleStyle: {
+                                fontWeight: 'bold'
+                            },
+                            // headerLeft: () => {
+                            //     return <Pressable onPress={() => alert('back pressed')}>
+                            //         <Ionicons name="arrow-back" size={24} color="black" />
+                            //     </Pressable>
+                            // },
+                            headerRight: () => {
+                                return <Pressable onPress={() => alert('hamberger pressed')}>
+                                    <FontAwesome6 name="burger" size={24} color="dimgray" />
+                                </Pressable>
+                            }
+                        }}
+                        name="Profile"
+                        component={ProfileComponent} />
+                </Drawer.Navigator>
+            </NavigationContainer>
         </SafeAreaProvider>
     );
 }
