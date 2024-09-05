@@ -10,6 +10,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import 'react-native-gesture-handler';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import DummyLogin from './DummyLogin';
+import { AuthProvider } from './context/AuthContext';
+import { useAuth } from './hooks/useAuth';
 
 const BottomTab = createMaterialBottomTabNavigator();
 
@@ -56,7 +59,7 @@ const Stack = createNativeStackNavigator()
 const PublicNavigator = () => {
     return (
         <Stack.Navigator initialRouteName='Login'>
-            <Stack.Screen name="Login" component={DummyComponent('Login')} />
+            <Stack.Screen name="Login" component={DummyLogin} />
             <Stack.Screen name="Register" component={DummyComponent('Register')} />
         </Stack.Navigator>
     )
@@ -73,19 +76,28 @@ const ProtectedNavigator = () => {
     )
 }
 
+const NavigationContainerWithAut = () => {
+    const { isLogin } = useAuth()
+    return (
+        <NavigationContainer>
+            {isLogin ?
+                <ProtectedNavigator />
+                : <PublicNavigator />
+            }
+        </NavigationContainer>
+    )
+}
+
 export default function App() {
 
-    const [isLogin, setIsLogin] = useState(false);
+
 
     return (
         <SafeAreaProvider>
             <SafeAreaView style={{ flex: 1 }}>
-                <NavigationContainer>
-                    {isLogin ?
-                        <ProtectedNavigator />
-                        : <PublicNavigator />
-                    }
-                </NavigationContainer>
+                <AuthProvider>
+                    <NavigationContainerWithAut />
+                </AuthProvider>
             </SafeAreaView>
         </SafeAreaProvider>
     );
