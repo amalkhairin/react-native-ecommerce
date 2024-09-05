@@ -1,16 +1,42 @@
+import AsyncStorage, { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { createContext, useState } from "react";
 
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({children}) => {
 
-    const [isLogin, setIsLogin] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    if (!setIsLogin) {
+    const { getItem, setItem } = useAsyncStorage('@token');
+
+    const login = async (username, password) => {
+        // ceritanya ada axios
+        const axios = {
+            post: (username, passowrd, path) => {
+                console.log(username)
+                console.log(passowrd)
+                return {data: {token: 'token'}}
+            }
+        }
+        const resp = axios.post(username,password, 'login');
+
+        if (resp) {
+            setIsAuthenticated(true);
+            await setItem(resp.data.token);
+        }
+    }
+
+    const logout = async () => {
+        setIsAuthenticated(false);
+        await AsyncStorage.removeItem('@token');
+    }
+    
+
+    if (!setIsAuthenticated) {
         return <Text>Loading...</Text>
     }
 
-    return <AuthContext.Provider value={{isLogin, setIsLogin}}>
+    return <AuthContext.Provider value={{login, logout, isAuthenticated}}>
         {children}
     </AuthContext.Provider>
 }

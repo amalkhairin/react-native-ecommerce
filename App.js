@@ -77,10 +77,10 @@ const ProtectedNavigator = () => {
 }
 
 const NavigationContainerWithAut = () => {
-    const { isLogin } = useAuth()
+    const { isAuthenticated } = useAuth()
     return (
         <NavigationContainer>
-            {isLogin ?
+            {isAuthenticated ?
                 <ProtectedNavigator />
                 : <PublicNavigator />
             }
@@ -89,9 +89,6 @@ const NavigationContainerWithAut = () => {
 }
 
 export default function App() {
-
-
-
     return (
         <SafeAreaProvider>
             <SafeAreaView style={{ flex: 1 }}>

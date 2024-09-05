@@ -3,11 +3,13 @@ import React, { Component, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import { useAuth } from './hooks/useAuth';
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 // create a component
 const DummyLogin = () => {
 
-    const {setIsLogin} = useAuth();
+    const {login} = useAuth();
+
 
     const [loginForm, setLoginForm] = useState({
         username: '',
@@ -22,7 +24,7 @@ const DummyLogin = () => {
 
     return (
         <View style={{ flex: 1 }}>
-            <View style={{ gap: 10, flex: 1, justifyContent: "center" }}>
+            <View style={{ gap: 10, flex: 1, justifyContent: "center",paddingHorizontal: 20 }}>
                 <TextInput
                     label={'Username'}
                     value={loginForm.username}
@@ -35,12 +37,12 @@ const DummyLogin = () => {
                     onChange={onChangeTextHandler('password')}
                     right={
                         <TextInput.Icon
-                            name={isShowPassword ? 'eye' : 'eye-off'}
+                            icon={isShowPassword ? 'eye' : 'eye-off'}
                             onPress={() => setIsShowPassword(!isShowPassword)}
                         />
                     }
                 />
-                <Button mode="contained" onPress={() => setIsLogin(true)}>
+                <Button mode="contained" onPress={login}>
                     Login
                 </Button>
             </View>
