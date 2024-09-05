@@ -40,7 +40,7 @@ const DummyLogin = () => {
                         />
                     }
                 />
-                <Button mode="contained" onPress={setIsLogin(true)}>
+                <Button mode="contained" onPress={() => setIsLogin(true)}>
                     Login
                 </Button>
             </View>
