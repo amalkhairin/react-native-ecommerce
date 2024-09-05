@@ -8,10 +8,9 @@ import { StatusBar } from 'expo-status-bar';
 import { Button, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useEffect, useState } from 'react';
-import Ionicons from '@expo/vector-icons/Ionicons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-const Stack = createNativeStackNavigator();
+
 const Tab = createBottomTabNavigator();
 
 
@@ -84,24 +83,11 @@ const ProfileComponent = (props) => {
     )
 }
 
-const routeIconMapping = {
-    Home: 'home',
-    Product: 'cube',
-    Profile: 'person',
-}
-
 export default function App() {
     return (
         <SafeAreaProvider>
             <NavigationContainer>
-                <Tab.Navigator screenOptions={({ route }) => ({
-                    headerShown: false,
-                    tabBarIcon: ({ focused, color, size }) => {
-                        return <Ionicons name={routeIconMapping[route.name]} size={size} color={color} />
-                    },
-                    tabBarActiveTintColor: 'darkturquoise',
-                    tabBarInactiveTintColor: 'gray',
-                })} initialRouteName="Profile">
+                <Tab.Navigator screenOptions={{ headerShown: false }} initialRouteName="Profile">
                     <Tab.Screen
                         name="Home"
                         component={HomeComponent} />
