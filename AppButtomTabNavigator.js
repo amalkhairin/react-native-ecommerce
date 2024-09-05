@@ -10,12 +10,9 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useEffect, useState } from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import 'react-native-gesture-handler';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-const Drawer = createDrawerNavigator();
 
 
 const HomeComponent = (props) => {
@@ -97,8 +94,8 @@ export default function App() {
     return (
         <SafeAreaProvider>
             <NavigationContainer>
-                <Drawer.Navigator screenOptions={({ route }) => ({
-                    // headerShown: false,
+                <Tab.Navigator screenOptions={({ route }) => ({
+                    headerShown: false,
                     tabBarIcon: ({ focused, color, size }) => {
                         return <Ionicons name={routeIconMapping[route.name]} size={size} color={color} />
                     },
@@ -107,14 +104,14 @@ export default function App() {
                     tabBarBadge: route.name == 'Product' ? '99+' : null
                     // tabBarShowLabel: false
                 })} initialRouteName="Profile">
-                    <Drawer.Screen
+                    <Tab.Screen
                         name="Home"
                         component={HomeComponent} />
-                    <Drawer.Screen
+                    <Tab.Screen
                         options={{ headerShown: true }}
                         name="Product"
                         component={ProductComponent} />
-                    <Drawer.Screen
+                    <Tab.Screen
                         options={{
                             title: 'Profile and Settings',
                             headerShown: true,
@@ -138,7 +135,7 @@ export default function App() {
                         }}
                         name="Profile"
                         component={ProfileComponent} />
-                </Drawer.Navigator>
+                </Tab.Navigator>
             </NavigationContainer>
         </SafeAreaProvider>
     );
